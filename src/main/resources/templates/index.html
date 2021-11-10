@@ -10,7 +10,6 @@
 <body>
 <div th:insert="blocks/header :: header"></div>
 <main class="container">
-    <p th:text="${articles.getTotalElements()}"></p>
     <div class="card mb-2" th:each="article : ${articles}">
         <div class="card-body">
             <h5 class="card-title" th:text="${article.getName()}"></h5>
