@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Статьи</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="blocks/header :: header"></div>
+<main class="container">
+    <p th:text="${articles.getTotalElements()}"></p>
+    <div class="card mb-2" th:each="article : ${articles}">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${article.getName()}"></h5>
+            <p class="card-text" th:text="${article.getText()}"></p>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" th:if="${articles.totalPages > 1}">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}" th:switch="${articles.getNumber()} == ${pageNumber - 1}">
+                <a class="page-link" th:case="true" th:text="${pageNumber}"></a>
+                <a class="page-link" th:case="false" th:href="${url}+'?page='+${pageNumber - 1}" th:text="${pageNumber}"></a>
+            </li>
+        </ul>
+    </nav>
+</main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</html>
